@@ -1,0 +1,8 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+.cpabuild.com	TRUE	/	FALSE	1999999999	__cfduid	d63acb8fa9389a40166d582ad2d477c5d1610852350
+bucket.cpabuild.com	TRUE	/	FALSE	1999999999	SameSite	Lax
+.histats.com	TRUE	/	FALSE	1999999999	CountUid	308fc870-53vc-4427-a8b3-5ca9c6bd2e91
+.freetopgenerator.site	TRUE	/	FALSE	1999999999	__cfduid	d81c980eec51308367bd20c581a63baf21610852357
+freetopgenerator.site	TRUE	/	FALSE	1999999999	SameSite	Lax
+
